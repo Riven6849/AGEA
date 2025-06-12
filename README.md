@@ -1,1 +1,1 @@
-This algorithm runs on the PlateMo platform
+This algorithm runs on the PlateMo platform.
