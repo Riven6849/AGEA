@@ -1,5 +1,4 @@
 classdef Block_Mutation2 < BLOCK
-% Trick mutation for real variables
 % nSets ---  5 --- Number of parameter sets
 % D     --- 30 --- Number of decision variables
 
@@ -41,16 +40,6 @@ classdef Block_Mutation2 < BLOCK
             ParentDec  = obj.Gather(Problem,Precursors,Ratio,2,1);
             [r,a]      = ParaSampling(size(ParentDec),obj.Weight(:,1:end-1),obj.Fit);
             obj.output = r.*ParentDec + a.*repmat(Problem.upper-Problem.lower,size(ParentDec,1),1) + repmat(Problem.lower,size(ParentDec,1),1);
-        end
-
-        function Modify(obj,index,para)
-            obj.Weight(index,:) = [0,para,1];
-            obj.Fit       = cumsum(obj.Weight(:,end));
-            obj.Fit       = obj.Fit./max(obj.Fit);
-            obj.parameter = reshape(obj.Weight',1,[]);
-        end
-        function Modify2(obj,index,w)
-            obj.Weight(index,1) = w;
         end
     end
 end
